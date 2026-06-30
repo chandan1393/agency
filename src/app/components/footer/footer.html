@@ -64,8 +64,16 @@
     >
       <p>© {{ year }} {{ brand.name }}. All rights reserved.</p>
       <div class="flex items-center gap-6">
-        <a href="#" (click)="$event.preventDefault()" class="transition-colors hover:text-brand-primary">Privacy</a>
-        <a href="#" (click)="$event.preventDefault()" class="transition-colors hover:text-brand-primary">Terms</a>
+        <a
+          routerLink="/privacy-policy"
+          class="transition-colors hover:text-brand-primary"
+          >Privacy Policy</a
+        >
+        <a
+          routerLink="/terms-and-conditions"
+          class="transition-colors hover:text-brand-primary"
+          >Terms &amp; Conditions</a
+        >
         <span class="flex items-center gap-1.5">
           Built with <i class="fa-solid fa-heart text-brand-danger"></i> &amp; Angular
         </span>

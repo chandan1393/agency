@@ -50,8 +50,30 @@ src/app/
 │     ├─ count-up.directive.ts  # animated counters
 │     └─ tilt.directive.ts      # 3D card tilt
 ├─ shared/section-heading/      # reusable heading block
+├─ pages/
+│  ├─ home/                     # landing page (composes all sections)
+│  ├─ privacy-policy/           # /privacy-policy
+│  └─ terms-and-conditions/     # /terms-and-conditions
 └─ components/                  # one folder per section (standalone)
 ```
+
+### Routing & pages
+The app shell (`app.html`) holds the global chrome — loader, cursor glow, navbar,
+footer, back-to-top — around a `<router-outlet>`. Routes:
+
+| Path | Page |
+| --- | --- |
+| `/` | Landing page (in-page fragment scrolling) |
+| `/privacy-policy` | Privacy Policy (lazy-loaded, prerendered) |
+| `/terms-and-conditions` | Terms & Conditions (lazy-loaded, prerendered) |
+
+Both legal pages reuse one data-driven `LegalPageComponent` (hero banner, reading-
+progress bar, sticky desktop table of contents with active-section highlighting,
+animated content cards, back-to-top). Their content lives in
+`core/data/privacy.data.ts` and `core/data/terms.data.ts`; per-page SEO (title,
+description, canonical, Open Graph, Twitter, `WebPage` JSON-LD) is applied by
+`core/services/seo.service.ts`. Navbar and footer fragment links are router-aware,
+so they work from any page.
 
 Conventions: standalone components, OnPush change detection everywhere, Angular
 signals for local state, strict TypeScript, no inline CSS/JS, reusable interfaces

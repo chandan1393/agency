@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import {
   BRAND,
   FOOTER_COLUMNS,
@@ -10,9 +11,11 @@ import {
   selector: 'app-footer',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [RouterLink],
   templateUrl: './footer.html',
 })
 export class FooterComponent {
+  private readonly router = inject(Router);
   protected readonly brand = BRAND;
   protected readonly columns = FOOTER_COLUMNS;
   protected readonly socials = SOCIALS;
@@ -27,11 +30,23 @@ export class FooterComponent {
     const fragment = this.fragmentByLabel.get(label.toLowerCase());
     if (!fragment) return;
     event.preventDefault();
-    document.getElementById(fragment)?.scrollIntoView({ behavior: 'smooth' });
+    if (this.onHome()) {
+      document.getElementById(fragment)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/'], { fragment });
+    }
   }
 
   scrollTop(event: Event): void {
     event.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (this.onHome()) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
+
+  private onHome(): boolean {
+    return this.router.url.split(/[?#]/)[0] === '/';
   }
 }

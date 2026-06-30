@@ -5,6 +5,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { ThemeService } from '../../core/services/theme.service';
 import { BRAND, NAV_LINKS } from '../../core/data/site.data';
 
@@ -16,6 +17,7 @@ import { BRAND, NAV_LINKS } from '../../core/data/site.data';
 })
 export class NavbarComponent {
   protected readonly theme = inject(ThemeService);
+  private readonly router = inject(Router);
   protected readonly brand = BRAND;
   protected readonly links = NAV_LINKS;
 
@@ -45,8 +47,18 @@ export class NavbarComponent {
   goTo(fragment: string, event: Event): void {
     event.preventDefault();
     this.menuOpen.set(false);
-    const el = document.getElementById(fragment);
-    el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // On the landing page, smooth-scroll in place. From any other route,
+    // navigate home with the fragment so the section is reachable.
+    if (this.onHome()) {
+      document.getElementById(fragment)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      this.router.navigate(['/'], { fragment });
+    }
+  }
+
+  private onHome(): boolean {
+    return this.router.url.split(/[?#]/)[0] === '/';
   }
 
   toggleMenu(): void {

@@ -83,3 +83,29 @@ export interface FooterColumn {
   readonly title: string;
   readonly links: readonly string[];
 }
+
+/** ---- Legal pages (Privacy / Terms) ---- */
+
+export interface LegalBlock {
+  readonly type: 'p' | 'list';
+  readonly text?: string;
+  readonly items?: readonly string[];
+}
+
+export interface LegalSection {
+  readonly id: string;
+  readonly title: string;
+  readonly icon: string;
+  readonly blocks: readonly LegalBlock[];
+}
+
+export interface LegalPageData {
+  readonly eyebrow: string;
+  readonly title: string;
+  readonly subtitle: string;
+  readonly updated: string;
+  readonly seoTitle: string;
+  readonly seoDescription: string;
+  readonly path: string;
+  readonly sections: readonly LegalSection[];
+}
