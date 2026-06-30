@@ -1,0 +1,219 @@
+<section id="contact" class="section-pad">
+  <div class="container-x">
+    <div class="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+      <!-- Left: pitch + quick actions -->
+      <div appReveal variant="left">
+        <span class="eyebrow"><i class="fa-solid fa-paper-plane text-[0.65rem]"></i> Contact</span>
+        <h2 class="mt-5 font-display text-3xl font-bold leading-tight text-balance sm:text-4xl lg:text-5xl">
+          Let's build something <span class="gradient-text">remarkable</span>
+        </h2>
+        <p class="mt-5 max-w-md text-base leading-relaxed text-muted">
+          Tell us about your project and we'll get back within one business day with a tailored
+          quote. Prefer to talk? Reach us directly.
+        </p>
+
+        <div class="mt-8 space-y-4">
+          <a
+            [href]="'mailto:' + brand.email"
+            class="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white/60 p-4 transition hover:-translate-y-0.5 hover:border-brand-primary/40 dark:bg-white/[0.03]"
+          >
+            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-primary/10 text-brand-primary">
+              <i class="fa-solid fa-envelope"></i>
+            </span>
+            <span>
+              <span class="block text-xs text-muted">Email us</span>
+              <span class="font-medium">{{ brand.email }}</span>
+            </span>
+          </a>
+          <a
+            [href]="'tel:' + brand.phone"
+            class="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white/60 p-4 transition hover:-translate-y-0.5 hover:border-brand-primary/40 dark:bg-white/[0.03]"
+          >
+            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-secondary/10 text-brand-secondary">
+              <i class="fa-solid fa-phone"></i>
+            </span>
+            <span>
+              <span class="block text-xs text-muted">Call us</span>
+              <span class="font-medium">{{ brand.phone }}</span>
+            </span>
+          </a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a [href]="whatsappLink" target="_blank" rel="noopener" class="btn-primary">
+            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
+          </a>
+          <a [href]="'tel:' + brand.phone" class="btn-ghost">
+            <i class="fa-solid fa-phone-volume"></i> Call Now
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div appReveal variant="right" [delay]="120">
+        <div class="card-surface rounded-4xl p-7 sm:p-9">
+          @if (status() === 'success') {
+            <div class="flex flex-col items-center justify-center py-12 text-center">
+              <app-lottie-player
+                src="assets/lottie/success-check.json"
+                [loop]="false"
+                class="h-28 w-28"
+              />
+              <h3 class="mt-3 font-display text-xl font-bold">Message sent!</h3>
+              <p class="mt-2 max-w-sm text-sm text-muted">
+                Thanks for reaching out. We've received your details and will be in touch within
+                one business day.
+              </p>
+              <button type="button" (click)="reset()" class="btn-ghost mt-6">
+                Send another message
+              </button>
+            </div>
+          } @else if (status() === 'error') {
+            <div class="flex flex-col items-center justify-center py-16 text-center">
+              <span class="grid h-16 w-16 place-items-center rounded-full bg-brand-danger/15 text-2xl text-brand-danger">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+              </span>
+              <h3 class="mt-5 font-display text-xl font-bold">Something went wrong</h3>
+              <p class="mt-2 max-w-sm text-sm text-muted">
+                We couldn't send your message just now. Please try again, or reach us directly via
+                email or WhatsApp.
+              </p>
+              <button type="button" (click)="retry()" class="btn-primary mt-6">Try again</button>
+            </div>
+          } @else {
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="space-y-5">
+              <div class="grid gap-5 sm:grid-cols-2">
+                <!-- Name -->
+                <div>
+                  <label for="name" class="mb-1.5 block text-sm font-medium">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    formControlName="name"
+                    placeholder="Jane Doe"
+                    class="form-input"
+                    [class.input-error]="invalid('name')"
+                  />
+                  @if (invalid('name')) {
+                    <p class="form-hint">Please enter your name.</p>
+                  }
+                </div>
+                <!-- Email -->
+                <div>
+                  <label for="email" class="mb-1.5 block text-sm font-medium">Email</label>
+                  <input
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    placeholder="jane@company.com"
+                    class="form-input"
+                    [class.input-error]="invalid('email')"
+                  />
+                  @if (invalid('email')) {
+                    <p class="form-hint">Enter a valid email address.</p>
+                  }
+                </div>
+                <!-- Phone -->
+                <div>
+                  <label for="phone" class="mb-1.5 block text-sm font-medium">Phone</label>
+                  <input
+                    id="phone"
+                    type="tel"
+                    formControlName="phone"
+                    placeholder="+1 555 012 3344"
+                    class="form-input"
+                    [class.input-error]="invalid('phone')"
+                  />
+                  @if (invalid('phone')) {
+                    <p class="form-hint">Enter a valid phone number.</p>
+                  }
+                </div>
+                <!-- Company -->
+                <div>
+                  <label for="company" class="mb-1.5 block text-sm font-medium">
+                    Company <span class="text-muted">(optional)</span>
+                  </label>
+                  <input
+                    id="company"
+                    type="text"
+                    formControlName="company"
+                    placeholder="Acme Inc."
+                    class="form-input"
+                  />
+                </div>
+                <!-- Service -->
+                <div>
+                  <label for="service" class="mb-1.5 block text-sm font-medium">Service</label>
+                  <select
+                    id="service"
+                    formControlName="service"
+                    class="form-input"
+                    [class.input-error]="invalid('service')"
+                  >
+                    <option value="" disabled>Select a service</option>
+                    @for (option of services; track option) {
+                      <option [value]="option">{{ option }}</option>
+                    }
+                  </select>
+                  @if (invalid('service')) {
+                    <p class="form-hint">Please choose a service.</p>
+                  }
+                </div>
+                <!-- Budget -->
+                <div>
+                  <label for="budget" class="mb-1.5 block text-sm font-medium">Budget</label>
+                  <select
+                    id="budget"
+                    formControlName="budget"
+                    class="form-input"
+                    [class.input-error]="invalid('budget')"
+                  >
+                    <option value="" disabled>Select a budget</option>
+                    @for (option of budgets; track option) {
+                      <option [value]="option">{{ option }}</option>
+                    }
+                  </select>
+                  @if (invalid('budget')) {
+                    <p class="form-hint">Please choose a budget range.</p>
+                  }
+                </div>
+              </div>
+
+              <!-- Message -->
+              <div>
+                <label for="message" class="mb-1.5 block text-sm font-medium">Message</label>
+                <textarea
+                  id="message"
+                  rows="4"
+                  formControlName="message"
+                  placeholder="Tell us about your project, goals and timeline…"
+                  class="form-input resize-none"
+                  [class.input-error]="invalid('message')"
+                ></textarea>
+                @if (invalid('message')) {
+                  <p class="form-hint">Please add a few details (10+ characters).</p>
+                }
+              </div>
+
+              <button
+                type="submit"
+                class="btn-primary w-full"
+                [disabled]="status() === 'submitting'"
+                [class.opacity-70]="status() === 'submitting'"
+              >
+                @if (status() === 'submitting') {
+                  <i class="fa-solid fa-circle-notch animate-spin"></i> Sending…
+                } @else {
+                  <i class="fa-solid fa-paper-plane"></i> Send Message
+                }
+              </button>
+              <p class="text-center text-xs text-muted">
+                Your details are sent securely to our team — no spam, ever.
+              </p>
+            </form>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

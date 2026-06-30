@@ -1,0 +1,158 @@
+<section id="home" class="relative overflow-hidden pt-32 pb-20 sm:pt-36 lg:pt-44">
+  <!-- Animated aurora background -->
+  <div class="js-aurora pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div
+      class="absolute -left-32 -top-24 h-[34rem] w-[34rem] rounded-full bg-brand-primary/30 blur-[120px] animate-floaty"
+    ></div>
+    <div
+      class="absolute -right-24 top-10 h-[30rem] w-[30rem] rounded-full bg-brand-secondary/30 blur-[120px] animate-floaty2"
+    ></div>
+    <div
+      class="absolute bottom-0 left-1/3 h-[26rem] w-[26rem] rounded-full bg-brand-accent/25 blur-[120px] animate-floaty"
+    ></div>
+    <div
+      class="absolute inset-0 bg-grid-light bg-[size:42px_42px] opacity-60 dark:bg-grid-dark [mask-image:radial-gradient(ellipse_at_center,black,transparent_72%)]"
+    ></div>
+  </div>
+
+  <div class="container-x grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr]">
+    <!-- Copy -->
+    <div appReveal>
+      <span class="eyebrow">
+        <span class="relative flex h-2 w-2">
+          <span
+            class="absolute inline-flex h-full w-full animate-pulse-ring rounded-full bg-brand-success"
+          ></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-success"></span>
+        </span>
+        Available for new projects
+      </span>
+
+      <h1
+        class="mt-6 font-display text-4xl font-extrabold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-[3.75rem]"
+      >
+        Build stunning websites that
+        <span class="gradient-text">grow your business</span>
+      </h1>
+
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
+        Professional websites that are fast, SEO-optimized, mobile responsive, and
+        engineered to convert visitors into customers — designed and built by a senior team.
+      </p>
+
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href="#contact" (click)="scrollTo('contact', $event)" class="btn-primary">
+          <i class="fa-solid fa-bolt"></i> Get Free Quote
+        </a>
+        <a href="#portfolio" (click)="scrollTo('portfolio', $event)" class="btn-ghost">
+          <i class="fa-solid fa-play text-xs"></i> View Portfolio
+        </a>
+      </div>
+
+      <!-- Counters -->
+      <dl class="mt-12 grid max-w-lg grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-4">
+        @for (stat of stats; track stat.label) {
+          <div>
+            <dt
+              class="font-display text-2xl font-extrabold gradient-text sm:text-3xl"
+              [appCountUp]="stat.value"
+              [suffix]="stat.suffix"
+            ></dt>
+            <dd class="mt-1 text-xs font-medium leading-snug text-muted">{{ stat.label }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <!-- Mockup -->
+    <div class="relative" appReveal variant="right" [delay]="120">
+      <!-- Floating tech chips -->
+      <div class="pointer-events-none absolute -left-6 top-6 z-20 hidden sm:block">
+        <div class="glass animate-floaty rounded-2xl px-4 py-2.5 shadow-soft">
+          <span class="flex items-center gap-2 text-sm font-semibold">
+            <i class="fa-brands fa-angular" style="color:#DD0031"></i> Angular
+          </span>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute -right-4 top-24 z-20 hidden sm:block">
+        <div class="glass animate-floaty2 rounded-2xl px-4 py-2.5 shadow-soft">
+          <span class="flex items-center gap-2 text-sm font-semibold">
+            <i class="fa-solid fa-leaf" style="color:#6DB33F"></i> Spring Boot
+          </span>
+        </div>
+      </div>
+      <div class="pointer-events-none absolute -left-2 bottom-10 z-20 hidden sm:block">
+        <div class="glass animate-floaty rounded-2xl px-4 py-2.5 shadow-soft">
+          <span class="flex items-center gap-2 text-sm font-semibold">
+            <i class="fa-solid fa-magnifying-glass-chart" style="color:#2563EB"></i> SEO Ready
+          </span>
+        </div>
+      </div>
+
+      <!-- Browser window -->
+      <div class="js-mockup card-surface relative z-10 overflow-hidden rounded-4xl p-2 shadow-glow">
+        <div class="flex items-center gap-1.5 px-3 py-2.5">
+          <span class="h-3 w-3 rounded-full bg-brand-danger/80"></span>
+          <span class="h-3 w-3 rounded-full bg-brand-warning/80"></span>
+          <span class="h-3 w-3 rounded-full bg-brand-success/80"></span>
+          <span
+            class="ml-3 flex-1 truncate rounded-full bg-black/5 px-3 py-1 text-[0.7rem] text-muted dark:bg-white/5"
+          >
+            https://yourbrand.com
+          </span>
+        </div>
+
+        <div
+          class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-primary/10 via-brand-secondary/10 to-brand-accent/10 p-5"
+        >
+          <!-- Faux dashboard -->
+          <div class="flex items-center justify-between">
+            <div class="space-y-1.5">
+              <div class="h-2.5 w-24 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary"></div>
+              <div class="h-2 w-16 rounded-full bg-black/10 dark:bg-white/10"></div>
+            </div>
+            <div class="h-8 w-20 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent"></div>
+          </div>
+
+          <div class="mt-5 grid grid-cols-3 gap-3">
+            @for (i of [1,2,3]; track i) {
+              <div class="rounded-2xl bg-white/70 p-3 shadow-sm dark:bg-white/5">
+                <div class="h-7 w-7 rounded-lg bg-gradient-to-br from-brand-primary to-brand-secondary"></div>
+                <div class="mt-3 h-2 w-full rounded-full bg-black/10 dark:bg-white/10"></div>
+                <div class="mt-1.5 h-2 w-2/3 rounded-full bg-black/5 dark:bg-white/5"></div>
+              </div>
+            }
+          </div>
+
+          <!-- Bar chart -->
+          <div class="mt-5 flex items-end gap-2 rounded-2xl bg-white/70 p-4 dark:bg-white/5">
+            @for (h of [40,65,52,80,60,92,74]; track $index) {
+              <div
+                class="flex-1 rounded-t-lg bg-gradient-to-t from-brand-primary to-brand-accent"
+                [style.height.px]="h"
+              ></div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Glow under mockup -->
+      <div
+        class="absolute inset-x-8 -bottom-6 -z-0 h-24 rounded-full bg-brand-primary/40 blur-3xl"
+      ></div>
+    </div>
+  </div>
+
+  <!-- Tech ticker under hero -->
+  <div class="container-x mt-16">
+    <div class="flex flex-wrap items-center justify-center gap-3" appReveal [delay]="160">
+      @for (t of tech; track t.name) {
+        <span
+          class="glass flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium shadow-sm"
+        >
+          <i [class]="t.icon" [style.color]="t.color"></i> {{ t.name }}
+        </span>
+      }
+    </div>
+  </div>
+</section>

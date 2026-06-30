@@ -1,0 +1,75 @@
+<footer class="relative overflow-hidden border-t border-[var(--border)] bg-soft pt-16">
+  <!-- ambient glow -->
+  <div
+    class="pointer-events-none absolute -top-24 left-1/2 h-48 w-[40rem] -translate-x-1/2 rounded-full bg-brand-primary/20 blur-[120px]"
+    aria-hidden="true"
+  ></div>
+
+  <div class="container-x relative">
+    <div class="grid gap-10 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
+      <!-- Brand -->
+      <div>
+        <a href="#home" (click)="scrollTop($event)" class="flex items-center gap-2.5">
+          <span
+            class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent text-white shadow-glow"
+          >
+            <i class="fa-solid fa-meteor text-sm"></i>
+          </span>
+          <span class="font-display text-lg font-bold tracking-tight">{{ brand.name }}</span>
+        </a>
+        <p class="mt-4 max-w-xs text-sm leading-relaxed text-muted">
+          Premium websites and web apps that are fast, SEO-optimized and built to convert.
+          Designed and engineered by a senior team.
+        </p>
+        <div class="mt-5 flex gap-2">
+          @for (social of socials; track social.label) {
+            <a
+              href="#"
+              (click)="$event.preventDefault()"
+              [attr.aria-label]="social.label"
+              class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] bg-white/60 text-muted transition-all hover:-translate-y-0.5 hover:bg-gradient-to-br hover:from-brand-primary hover:to-brand-secondary hover:text-white dark:bg-white/5"
+            >
+              <i [class]="social.icon"></i>
+            </a>
+          }
+        </div>
+      </div>
+
+      <!-- Link columns -->
+      @for (column of columns; track column.title) {
+        <div>
+          <h3 class="font-display text-sm font-semibold uppercase tracking-wide">
+            {{ column.title }}
+          </h3>
+          <ul class="mt-4 space-y-2.5">
+            @for (link of column.links; track link) {
+              <li>
+                <a
+                  href="#"
+                  (click)="scrollTo(link, $event)"
+                  class="text-sm text-muted transition-colors hover:text-brand-primary"
+                >
+                  {{ link }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[var(--border)] py-7 text-sm text-muted sm:flex-row"
+    >
+      <p>© {{ year }} {{ brand.name }}. All rights reserved.</p>
+      <div class="flex items-center gap-6">
+        <a href="#" (click)="$event.preventDefault()" class="transition-colors hover:text-brand-primary">Privacy</a>
+        <a href="#" (click)="$event.preventDefault()" class="transition-colors hover:text-brand-primary">Terms</a>
+        <span class="flex items-center gap-1.5">
+          Built with <i class="fa-solid fa-heart text-brand-danger"></i> &amp; Angular
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

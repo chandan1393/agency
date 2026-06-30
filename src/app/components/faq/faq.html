@@ -1,0 +1,40 @@
+<section id="faq" class="section-pad bg-soft">
+  <div class="container-x">
+    <app-section-heading
+      eyebrow="FAQ"
+      title="Questions, answered"
+      highlight="clearly"
+      subtitle="Everything you need to know before we get started. Still curious? Reach out any time."
+    />
+
+    <div class="mx-auto mt-14 max-w-3xl space-y-3" appReveal>
+      @for (faq of faqs; track faq.question; let i = $index) {
+        <div class="overflow-hidden rounded-2xl border border-[var(--border)] bg-white/70 dark:bg-white/[0.03]">
+          <button
+            type="button"
+            (click)="toggle(i)"
+            class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+            [attr.aria-expanded]="open() === i"
+          >
+            <span class="font-display text-base font-semibold">{{ faq.question }}</span>
+            <span
+              class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-primary/10 text-brand-primary transition-transform duration-300"
+              [class.rotate-45]="open() === i"
+            >
+              <i class="fa-solid fa-plus text-sm"></i>
+            </span>
+          </button>
+
+          <div
+            class="grid transition-all duration-300 ease-in-out"
+            [ngClass]="open() === i ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+          >
+            <div class="overflow-hidden">
+              <p class="px-6 pb-5 text-sm leading-relaxed text-muted">{{ faq.answer }}</p>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,63 @@
+<section id="pricing" class="section-pad">
+  <div class="container-x">
+    <app-section-heading
+      eyebrow="Pricing"
+      title="Simple, transparent"
+      highlight="packages"
+      subtitle="No hidden fees, no surprises. Pick a starting point — we'll tailor the final quote to exactly what you need."
+    />
+
+    <div class="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+      @for (plan of plans; track plan.name; let i = $index) {
+        <div
+          appReveal
+          [delay]="i * 110"
+          class="relative flex flex-col rounded-4xl border p-8 transition-all duration-300 hover:-translate-y-2"
+          [ngClass]="
+            plan.popular
+              ? 'border-brand-primary shadow-glow bg-white dark:bg-night lg:scale-[1.04] z-10'
+              : 'border-[var(--border)] card-surface'
+          "
+        >
+          @if (plan.popular) {
+            <span
+              class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary px-4 py-1 text-xs font-bold uppercase tracking-wide text-white shadow-glow"
+            >
+              <i class="fa-solid fa-star mr-1"></i> Most Popular
+            </span>
+          }
+
+          <h3 class="font-display text-xl font-bold">{{ plan.name }}</h3>
+          <p class="mt-1.5 text-sm text-muted">{{ plan.tagline }}</p>
+
+          <div class="mt-6 flex items-end gap-1.5">
+            <span class="font-display text-4xl font-extrabold">${{ plan.price }}</span>
+            <span class="pb-1 text-sm text-muted">{{ plan.cadence }}</span>
+          </div>
+
+          <a
+            href="#contact"
+            (click)="scrollToContact($event)"
+            class="mt-6"
+            [ngClass]="plan.popular ? 'btn-primary' : 'btn-ghost'"
+          >
+            {{ plan.cta }}
+          </a>
+
+          <ul class="mt-8 space-y-3 border-t border-[var(--border)] pt-6">
+            @for (feature of plan.features; track feature) {
+              <li class="flex items-start gap-3 text-sm">
+                <span
+                  class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-success/15 text-[0.65rem] text-brand-success"
+                >
+                  <i class="fa-solid fa-check"></i>
+                </span>
+                <span class="text-muted">{{ feature }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

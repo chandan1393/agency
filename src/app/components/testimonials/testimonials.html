@@ -1,0 +1,93 @@
+<section id="testimonials" class="section-pad">
+  <div class="container-x">
+    <app-section-heading
+      eyebrow="Testimonials"
+      title="Loved by the teams"
+      highlight="we work with"
+      subtitle="Don't just take our word for it — here's what clients say after launching with us."
+    />
+
+    <div
+      class="relative mx-auto mt-16 max-w-3xl"
+      appReveal
+      (mouseenter)="stop()"
+      (mouseleave)="start()"
+    >
+      <!-- Viewport -->
+      <div class="overflow-hidden rounded-4xl">
+        <div
+          class="flex transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          [style.transform]="'translateX(' + offset() + ')'"
+        >
+          @for (item of items; track item.name) {
+            <figure class="w-full shrink-0 px-1">
+              <div class="card-surface relative rounded-4xl p-8 sm:p-10">
+                <i
+                  class="fa-solid fa-quote-left absolute right-8 top-8 text-4xl text-brand-primary/15"
+                ></i>
+
+                <div class="flex gap-1 text-brand-warning">
+                  @for (s of stars; track s) {
+                    <i class="fa-solid fa-star text-sm"></i>
+                  }
+                </div>
+
+                <blockquote class="mt-5 text-lg leading-relaxed text-balance sm:text-xl">
+                  "{{ item.quote }}"
+                </blockquote>
+
+                <figcaption class="mt-7 flex items-center gap-4">
+                  <span
+                    class="grid h-12 w-12 place-items-center rounded-full font-display text-sm font-bold text-white"
+                    [style.background]="
+                      'linear-gradient(135deg,' + item.accent + ',' + item.accent + 'aa)'
+                    "
+                  >
+                    {{ item.initials }}
+                  </span>
+                  <div>
+                    <p class="font-display font-semibold">{{ item.name }}</p>
+                    <p class="text-sm text-muted">{{ item.role }} · {{ item.company }}</p>
+                  </div>
+                </figcaption>
+              </div>
+            </figure>
+          }
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="mt-8 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          (click)="prev(); start()"
+          class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] bg-white/60 transition hover:-translate-y-0.5 hover:text-brand-primary dark:bg-white/5"
+          aria-label="Previous testimonial"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="flex items-center gap-2">
+          @for (item of items; track item.name; let i = $index) {
+            <button
+              type="button"
+              (click)="goTo(i)"
+              class="h-2 rounded-full transition-all duration-300"
+              [ngClass]="index() === i ? 'w-7 bg-brand-primary' : 'w-2 bg-black/15 dark:bg-white/20'"
+              [attr.aria-label]="'Go to testimonial ' + (i + 1)"
+            ></button>
+          }
+        </div>
+
+        <button
+          type="button"
+          (click)="next(); start()"
+          class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] bg-white/60 transition hover:-translate-y-0.5 hover:text-brand-primary dark:bg-white/5"
+          aria-label="Next testimonial"
+        >
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

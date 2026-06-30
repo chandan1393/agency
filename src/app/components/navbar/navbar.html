@@ -1,0 +1,112 @@
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-500"
+  [class.py-2]="scrolled()"
+  [class.py-4]="!scrolled()"
+>
+  <nav
+    class="container-x flex items-center justify-between rounded-full px-4 py-3 transition-all duration-500"
+    [class.glass]="scrolled()"
+    [class.shadow-soft]="scrolled()"
+    aria-label="Primary"
+  >
+    <!-- Logo -->
+    <a
+      href="#home"
+      (click)="goTo('home', $event)"
+      class="flex items-center gap-2.5"
+      aria-label="Nebula Studio home"
+    >
+      <span
+        class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-primary via-brand-secondary to-brand-accent text-white shadow-glow"
+      >
+        <i class="fa-solid fa-meteor text-sm"></i>
+      </span>
+      <span class="font-display text-lg font-bold tracking-tight">{{ brand.name }}</span>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="hidden items-center gap-1 lg:flex">
+      @for (link of links; track link.fragment) {
+        <li>
+          <a
+            [href]="'#' + link.fragment"
+            (click)="goTo(link.fragment, $event)"
+            class="relative rounded-full px-3.5 py-2 text-sm font-medium text-muted transition-colors hover:text-brand-primary"
+            [class.text-brand-primary]="active() === link.fragment"
+          >
+            {{ link.label }}
+            @if (active() === link.fragment) {
+              <span
+                class="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary"
+              ></span>
+            }
+          </a>
+        </li>
+      }
+    </ul>
+
+    <!-- Right controls -->
+    <div class="flex items-center gap-2">
+      <button
+        type="button"
+        (click)="theme.toggle()"
+        class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] bg-white/40 text-base transition-all hover:-translate-y-0.5 hover:text-brand-primary dark:bg-white/5"
+        [attr.aria-label]="theme.isDark() ? 'Switch to light mode' : 'Switch to dark mode'"
+      >
+        <i [class]="theme.isDark() ? 'fa-solid fa-sun' : 'fa-solid fa-moon'"></i>
+      </button>
+
+      <a
+        href="#contact"
+        (click)="goTo('contact', $event)"
+        class="btn-ghost hidden sm:inline-flex"
+      >
+        Book Call
+      </a>
+      <a
+        href="#contact"
+        (click)="goTo('contact', $event)"
+        class="btn-primary hidden sm:inline-flex"
+      >
+        Get Quote
+      </a>
+
+      <!-- Hamburger -->
+      <button
+        type="button"
+        (click)="toggleMenu()"
+        class="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] bg-white/40 text-lg lg:hidden dark:bg-white/5"
+        [attr.aria-expanded]="menuOpen()"
+        aria-label="Toggle navigation menu"
+      >
+        <i [class]="menuOpen() ? 'fa-solid fa-xmark' : 'fa-solid fa-bars'"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  @if (menuOpen()) {
+    <div class="container-x lg:hidden">
+      <div class="glass mt-3 rounded-3xl p-4 shadow-soft">
+        <ul class="grid gap-1">
+          @for (link of links; track link.fragment) {
+            <li>
+              <a
+                [href]="'#' + link.fragment"
+                (click)="goTo(link.fragment, $event)"
+                class="block rounded-2xl px-4 py-3 text-sm font-medium text-muted transition-colors hover:bg-brand-primary/10 hover:text-brand-primary"
+                [class.text-brand-primary]="active() === link.fragment"
+              >
+                {{ link.label }}
+              </a>
+            </li>
+          }
+        </ul>
+        <div class="mt-3 grid grid-cols-2 gap-2">
+          <a href="#contact" (click)="goTo('contact', $event)" class="btn-ghost">Book Call</a>
+          <a href="#contact" (click)="goTo('contact', $event)" class="btn-primary">Get Quote</a>
+        </div>
+      </div>
+    </div>
+  }
+</header>

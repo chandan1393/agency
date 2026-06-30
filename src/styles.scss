@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Base
+   ============================================================ */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f8ff;
+  --text: #111827;
+  --muted: #5b657a;
+  --border: rgba(15, 23, 42, 0.08);
+  --glass: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(255, 255, 255, 0.6);
+}
+
+.dark {
+  --bg: #0f172a;
+  --bg-soft: #0b1222;
+  --text: #e9eefb;
+  --muted: #9aa6c2;
+  --border: rgba(255, 255, 255, 0.09);
+  --glass: rgba(20, 28, 48, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+  scroll-margin-top: 90px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.25);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#2563eb, #7c3aed);
+  border-radius: 9999px;
+}
+
+/* ============================================================
+   Reusable component classes
+   ============================================================ */
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-primary/20 bg-brand-primary/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary dark:border-brand-primary/30 dark:bg-brand-primary/10;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-primary via-brand-secondary to-brand-accent bg-clip-text text-transparent;
+  }
+
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+  }
+
+  .card-surface {
+    @apply rounded-3xl border border-[var(--border)] bg-white/70 shadow-soft backdrop-blur-xl dark:bg-white/[0.03];
+  }
+
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2 focus-visible:ring-offset-transparent;
+  }
+
+  .btn-primary {
+    @apply btn text-white shadow-glow;
+    background-image: linear-gradient(120deg, #2563eb, #7c3aed 55%, #06b6d4);
+    background-size: 160% 160%;
+  }
+  .btn-primary:hover {
+    @apply -translate-y-0.5;
+    animation: gradient 4s ease infinite;
+  }
+
+  .btn-ghost {
+    @apply btn border border-[var(--border)] bg-white/50 text-[var(--text)] hover:-translate-y-0.5 hover:border-brand-primary/40 dark:bg-white/5;
+  }
+
+  .section-pad {
+    @apply py-24 sm:py-28 lg:py-32;
+  }
+
+  .form-input {
+    @apply w-full rounded-2xl border border-[var(--border)] bg-white/70 px-4 py-3 text-sm text-[var(--text)] outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-brand-primary focus:ring-2 focus:ring-brand-primary/25 dark:bg-white/[0.04] dark:placeholder:text-slate-500;
+  }
+
+  .input-error {
+    @apply border-brand-danger/70 focus:border-brand-danger focus:ring-brand-danger/20;
+  }
+
+  .form-hint {
+    @apply mt-1.5 text-xs font-medium text-brand-danger;
+  }
+}
+
+@layer utilities {
+  .text-muted {
+    color: var(--muted);
+  }
+  .bg-soft {
+    background: var(--bg-soft);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+}
+
+/* ============================================================
+   Scroll reveal (driven by RevealDirective)
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal--left {
+  transform: translateX(-40px);
+}
+.reveal.reveal--right {
+  transform: translateX(40px);
+}
+.reveal.reveal--zoom {
+  transform: scale(0.92);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
