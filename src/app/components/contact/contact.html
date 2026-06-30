@@ -12,41 +12,7 @@
           quote. Prefer to talk? Reach us directly.
         </p>
 
-        <div class="mt-8 space-y-4">
-          <a
-            [href]="'mailto:' + brand.email"
-            class="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white/60 p-4 transition hover:-translate-y-0.5 hover:border-brand-primary/40 dark:bg-white/[0.03]"
-          >
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-primary/10 text-brand-primary">
-              <i class="fa-solid fa-envelope"></i>
-            </span>
-            <span>
-              <span class="block text-xs text-muted">Email us</span>
-              <span class="font-medium">{{ brand.email }}</span>
-            </span>
-          </a>
-          <a
-            [href]="'tel:' + brand.phone"
-            class="flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-white/60 p-4 transition hover:-translate-y-0.5 hover:border-brand-primary/40 dark:bg-white/[0.03]"
-          >
-            <span class="grid h-11 w-11 place-items-center rounded-xl bg-brand-secondary/10 text-brand-secondary">
-              <i class="fa-solid fa-phone"></i>
-            </span>
-            <span>
-              <span class="block text-xs text-muted">Call us</span>
-              <span class="font-medium">{{ brand.phone }}</span>
-            </span>
-          </a>
-        </div>
-
-        <div class="mt-6 flex flex-wrap gap-3">
-          <a [href]="whatsappLink" target="_blank" rel="noopener" class="btn-primary">
-            <i class="fa-brands fa-whatsapp text-base"></i> WhatsApp
-          </a>
-          <a [href]="'tel:' + brand.phone" class="btn-ghost">
-            <i class="fa-solid fa-phone-volume"></i> Call Now
-          </a>
-        </div>
+       
       </div>
 
       <!-- Right: form -->
