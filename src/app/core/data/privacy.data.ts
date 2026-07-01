@@ -153,6 +153,25 @@ export const PRIVACY_DATA: LegalPageData = {
       ],
     },
     {
+      id: 'mobile-sms',
+      title: 'Mobile Information & SMS Consent',
+      icon: 'fa-solid fa-comment-sms',
+      blocks: [
+        {
+          type: 'p',
+          text: `When you opt in to receive SMS text messages from ${BRAND.name}, we collect your mobile phone number and a record of your consent. Your mobile information and SMS consent will never be shared with third parties or affiliates for marketing or promotional purposes.`,
+        },
+        {
+          type: 'p',
+          text: 'All the above categories exclude text messaging originator opt-in data and consent; this information will not be shared with any third parties, excluding aggregators and providers of the Text Message services.',
+        },
+        {
+          type: 'p',
+          text: `SMS opt-in is entirely optional and is not a condition of purchasing any goods or services. Message frequency varies, and message and data rates may apply. You can opt out at any time by replying STOP, or reply HELP for assistance.`,
+        },
+      ],
+    },
+    {
       id: 'data-security',
       title: 'Data Security',
       icon: 'fa-solid fa-lock',

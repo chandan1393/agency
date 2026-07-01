@@ -1,5 +1,5 @@
 import { LegalPageData } from '../models/site.models';
-import { BRAND } from './site.data';
+import { BRAND, SMS_PROGRAM } from './site.data';
 
 export const TERMS_DATA: LegalPageData = {
   eyebrow: 'Legal',
@@ -34,6 +34,32 @@ export const TERMS_DATA: LegalPageData = {
         {
           type: 'p',
           text: 'The exact scope of each engagement is defined in the proposal or quotation agreed with the client. We reserve the right to refuse or discontinue services at our discretion.',
+        },
+      ],
+    },
+    {
+      id: 'sms-messaging',
+      title: 'SMS / Text Messaging',
+      icon: 'fa-solid fa-comment-sms',
+      blocks: [
+        {
+          type: 'p',
+          text: `Our SMS program, "${SMS_PROGRAM.programName}", allows customers who opt in to receive ${SMS_PROGRAM.messageTypes} from ${BRAND.name} at the mobile number they provide. Enrolment is optional and is not a condition of purchasing any product or service.`,
+        },
+        {
+          type: 'list',
+          items: [
+            'Opt-out: Reply STOP to any message to unsubscribe at any time.',
+            `Help: Reply HELP for assistance, or contact us at ${BRAND.email}.`,
+            'Message frequency varies.',
+            'Message and data rates may apply.',
+            'Supported carriers are not liable for delayed or undelivered messages.',
+          ],
+        },
+        {
+          type: 'p',
+          text: 'By opting in, you confirm that you are the account holder or have authorisation to consent for the mobile number provided. For details on how we collect, use, and protect your mobile information and SMS consent, please see our',
+          link: { label: 'Privacy Policy', route: '/privacy-policy' },
         },
       ],
     },

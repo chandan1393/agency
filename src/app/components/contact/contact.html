@@ -12,6 +12,8 @@
           quote. Prefer to talk? Reach us directly.
         </p>
 
+      
+
        
       </div>
 
@@ -158,6 +160,61 @@
                 ></textarea>
                 @if (invalid('message')) {
                   <p class="form-hint">Please add a few details (10+ characters).</p>
+                }
+              </div>
+
+              <!-- SMS opt-in (optional — form submits with or without it) -->
+              <div class="rounded-2xl border border-[var(--border)] bg-white/50 p-4 dark:bg-white/[0.03]">
+                <label for="smsConsent" class="flex items-start gap-3">
+                  <input
+                    id="smsConsent"
+                    type="checkbox"
+                    formControlName="smsConsent"
+                    class="mt-0.5 h-4 w-4 shrink-0 accent-brand-primary"
+                  />
+                  <span class="text-xs leading-relaxed text-muted">
+                    <span class="font-semibold text-[var(--text)]">
+                      <i class="fa-solid fa-comment-sms mr-1 text-brand-primary"></i>Text me updates
+                      (optional).
+                    </span>
+                    {{ smsConsentText }}
+                  </span>
+                </label>
+              </div>
+
+              <!-- Mandatory agreement to legal pages -->
+              <div>
+                <label for="legalConsent" class="flex items-start gap-3">
+                  <input
+                    id="legalConsent"
+                    type="checkbox"
+                    formControlName="legalConsent"
+                    class="mt-0.5 h-4 w-4 shrink-0 accent-brand-primary"
+                    [attr.aria-invalid]="invalid('legalConsent')"
+                  />
+                  <span class="text-xs leading-relaxed text-muted">
+                    I have read and agree to the
+                    <a
+                      routerLink="/privacy-policy"
+                      target="_blank"
+                      rel="noopener"
+                      class="font-semibold text-brand-primary underline underline-offset-2"
+                      >Privacy Policy</a
+                    >
+                    and
+                    <a
+                      routerLink="/terms-and-conditions"
+                      target="_blank"
+                      rel="noopener"
+                      class="font-semibold text-brand-primary underline underline-offset-2"
+                      >Terms &amp; Conditions</a
+                    >. <span class="text-brand-danger">*</span>
+                  </span>
+                </label>
+                @if (invalid('legalConsent')) {
+                  <p class="form-hint ml-7">
+                    Please accept the Privacy Policy and Terms &amp; Conditions to continue.
+                  </p>
                 }
               </div>
 

@@ -90,6 +90,8 @@ export interface LegalBlock {
   readonly type: 'p' | 'list';
   readonly text?: string;
   readonly items?: readonly string[];
+  /** Optional inline link rendered after the paragraph text. */
+  readonly link?: { readonly label: string; readonly route: string };
 }
 
 export interface LegalSection {

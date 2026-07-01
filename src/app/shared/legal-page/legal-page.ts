@@ -13,6 +13,7 @@ import { RevealDirective } from '../../core/directives/reveal.directive';
 import { SeoService } from '../../core/services/seo.service';
 import { LegalPageData } from '../../core/models/site.models';
 import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 /**
  * Shared layout for legal pages (Privacy Policy, Terms & Conditions).
@@ -24,7 +25,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-legal-page',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RevealDirective, NgClass],
+  imports: [RevealDirective, NgClass, RouterLink],
   templateUrl: './legal-page.html',
 })
 export class LegalPageComponent implements OnInit {

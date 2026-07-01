@@ -17,9 +17,9 @@ import {
 export const BRAND = {
   name: 'Nebula Studio',
   tagline: 'Websites that grow your business',
-  email: 'hello@nebulastudio.example',
-  phone: '+1 (555) 012-3344',
-  whatsapp: '15550123344',
+  email: 'assignnerd@gmail.com',
+  phone: '+1 737 734 2972',
+  whatsapp: '+1 737 734 2972',
 } as const;
 
 /** Navigation */
@@ -260,3 +260,26 @@ export const SERVICE_OPTIONS: readonly string[] = [
 export const BUDGET_OPTIONS: readonly string[] = [
   'Under $500', '$500 – $1,500', '$1,500 – $5,000', '$5,000+',
 ];
+
+/**
+ * A2P 10DLC SMS opt-in configuration.
+ * IMPORTANT: `businessName` must exactly match the business name on your
+ * 10DLC campaign registration. Edit `messageTypes` / `consentText` to match
+ * the campaign use case you registered with your provider.
+ */
+export const SMS_PROGRAM = {
+  businessName: BRAND.name,
+  programName: `${BRAND.name} Alerts`,
+  messageTypes:
+    'project updates, quotes, appointment reminders, and customer support',
+  frequency: 'Message frequency varies.',
+  rates: 'Message and data rates may apply.',
+  optOut: 'Reply STOP to opt-out, HELP for help.',
+  notCondition: 'Consent is not a condition of purchase.',
+} as const;
+
+/** Full checkbox consent sentence (contains all carrier-required phrases). */
+export const SMS_CONSENT_TEXT =
+  `By checking this box, I agree to receive SMS text messages from ${SMS_PROGRAM.businessName} ` +
+  `regarding ${SMS_PROGRAM.messageTypes}. ${SMS_PROGRAM.frequency} ${SMS_PROGRAM.rates} ` +
+  `${SMS_PROGRAM.optOut} ${SMS_PROGRAM.notCondition}`;

@@ -57,6 +57,23 @@ src/app/
 └─ components/                  # one folder per section (standalone)
 ```
 
+### SMS / A2P 10DLC compliance
+The contact form includes an **optional** SMS opt-in checkbox (unchecked by default;
+the form still submits without it) carrying the full carrier-required language, plus a
+**required** checkbox linking to the Privacy Policy and Terms. The Privacy Policy has a
+"Mobile Information & SMS Consent" section (including the mandated non-sharing sentence)
+and the Terms have an "SMS / Text Messaging" section.
+
+**Before submitting your campaign, set your registered business name and message
+details** in `src/app/core/data/site.data.ts`:
+
+- `BRAND.name` — must exactly match the business name on your 10DLC registration.
+- `SMS_PROGRAM` / `SMS_CONSENT_TEXT` — program name, message types, and the consent
+  sentence shown in the checkbox.
+
+The submitted payload records `smsConsent`, the exact `smsConsentText`, and a
+`consentTimestamp` for your opt-in audit trail.
+
 ### Routing & pages
 The app shell (`app.html`) holds the global chrome — loader, cursor glow, navbar,
 footer, back-to-top — around a `<router-outlet>`. Routes:

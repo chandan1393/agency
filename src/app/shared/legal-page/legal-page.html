@@ -89,7 +89,16 @@
             <div class="mt-4 space-y-3 text-sm leading-relaxed text-muted sm:text-[0.95rem]">
               @for (block of section.blocks; track $index) {
                 @if (block.type === 'p') {
-                  <p>{{ block.text }}</p>
+                  <p>
+                    {{ block.text }}
+                    @if (block.link) {
+                      <a
+                        [routerLink]="block.link.route"
+                        class="font-semibold text-brand-primary underline underline-offset-2"
+                        >{{ block.link.label }}</a
+                      >.
+                    }
+                  </p>
                 } @else {
                   <ul class="space-y-2 pl-1">
                     @for (item of block.items; track $index) {
